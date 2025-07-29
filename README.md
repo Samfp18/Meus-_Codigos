@@ -1,4 +1,4 @@
-                                                                             # Repositório de codigos 
+                                                                     # Repositório de codigos 
 
 # 💻 Repositório de Projetos | Desenvolvimento Web & Scripts de Otimização
 
