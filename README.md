@@ -1,7 +1,8 @@
-                                                                    
 # 💻 Repositório de Projetos | Desenvolvimento Web & Scripts de Otimização
 
-Bem-vindo(a) ao meu repositório! Aqui você encontrará uma coleção dos meus projetos voltados para **desenvolvimento web** e **automação/otimização de sistemas operacionais** utilizando **Python**. Este espaço é voltado para compartilhar soluções, estudos e boas práticas que aplico no meu dia a dia como desenvolvedor.
+Bem-vindo(a) ao meu repositório! Aqui você encontrará uma coleção dos meus projetos voltados para **desenvolvimento web** e **automação/otimização de sistemas operacionais** utilizando **Python**.
+
+Este repositório também tem como objetivo **servir de portfólio profissional**, armazenando meus principais códigos e soluções desenvolvidas, para fins de apresentação e contato com oportunidades na área de tecnologia.
 
 ---
 
@@ -11,6 +12,7 @@ Este repositório tem como foco:
 
 - 🕸️ **Desenvolvimento Web:** projetos front-end, back-end e full stack, explorando tecnologias modernas para criação de aplicações eficientes, responsivas e escaláveis.
 - ⚙️ **Scripts de Otimização (Python):** automação de tarefas e melhorias de desempenho no sistema operacional Windows, como limpeza de cache, desinstalação em lote, ajustes no registro e muito mais.
+- 📂 **Portfólio Técnico:** centralizar e versionar meus códigos de forma organizada e acessível para futuras parcerias ou oportunidades profissionais.
 
 ---
 
@@ -39,10 +41,10 @@ Todos os projetos aqui publicados são de caráter educacional e prático. Fique
 
 ## 📫 Contato
 
-Caso tenha interesse em trocar ideias, colaborar ou dar sugestões:
+Caso tenha interesse em trocar ideias, colaborar ou conferir meu trabalho:
 
 - GitHub: [@Samfp18](https://github.com/Samfp18)
-- www.linkedin.com/in/samuel-ferreira-pires
+- (Adicione outros meios de contato se desejar)
 
 ---
 
