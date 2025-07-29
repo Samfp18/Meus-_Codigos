@@ -1,5 +1,4 @@
-                                                                     # Repositório de codigos 
-
+                                                                    
 # 💻 Repositório de Projetos | Desenvolvimento Web & Scripts de Otimização
 
 Bem-vindo(a) ao meu repositório! Aqui você encontrará uma coleção dos meus projetos voltados para **desenvolvimento web** e **automação/otimização de sistemas operacionais** utilizando **Python**. Este espaço é voltado para compartilhar soluções, estudos e boas práticas que aplico no meu dia a dia como desenvolvedor.
