@@ -88,9 +88,9 @@ def gerar_relatorio_pdf(dados, recomendacoes, avaliacao_final):
 
 # Função para enviar o relatório por e-mail
 def enviar_email(arquivo_pdf):
-    remetente = "sfp27510@gmail.com"
-    destinatario = "sfp27510@gmail.com"
-    senha = "xycb fwkz axxl xmjr"
+    remetente = ""
+    destinatario = ""
+    senha = ""
 
     msg = MIMEMultipart()
     msg['From'] = remetente
