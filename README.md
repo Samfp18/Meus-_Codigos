@@ -44,7 +44,7 @@ Todos os projetos aqui publicados são de caráter educacional e prático. Fique
 Caso tenha interesse em trocar ideias, colaborar ou conferir meu trabalho:
 
 - GitHub: [@Samfp18](https://github.com/Samfp18)
-- (Adicione outros meios de contato se desejar)
+- www.linkedin.com/in/samuel-ferreira-pires
 
 ---
 
