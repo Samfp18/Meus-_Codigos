@@ -4,14 +4,15 @@ import shutil
 import ctypes
 import platform
 import psutil
-import time
+from typing import Optional
 
-def clean_temp_files():
-    """Clean Windows temp folders."""
+
+def clean_temp_files() -> None:
+    """Remove arquivos temporários do Windows (TEMP e Windows\Temp)."""
     temp_paths = [
         os.getenv('TEMP'),
         os.getenv('TMP'),
-        r'C:\\Windows\\Temp'
+        r'C:\Windows\Temp'
     ]
     for path in temp_paths:
         if path and os.path.exists(path):
@@ -19,130 +20,162 @@ def clean_temp_files():
                 for name in files:
                     try:
                         os.remove(os.path.join(root, name))
-                    except Exception:
-                        pass
+                    except PermissionError:
+                        continue
                 for name in dirs:
                     try:
                         shutil.rmtree(os.path.join(root, name))
-                    except Exception:
-                        pass
+                    except PermissionError:
+                        continue
 
-def clear_dns_cache():
-    """Flush DNS cache."""
+
+def clear_dns_cache() -> None:
+    """Limpa cache DNS do Windows."""
     if platform.system() == 'Windows':
         subprocess.run(['ipconfig', '/flushdns'], shell=True)
 
-def optimize_startup():
-    """List startup programs."""
+
+def optimize_startup() -> None:
+    """
+    Lista programas configurados para iniciar junto com o Windows.
+    (Por segurança, não remove nada automaticamente).
+    """
     try:
         import winreg
-        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
-                             r"Software\\Microsoft\\Windows\\CurrentVersion\\Run")
+        key = winreg.OpenKey(
+            winreg.HKEY_CURRENT_USER,
+            r"Software\Microsoft\Windows\CurrentVersion\Run"
+        )
         i = 0
         while True:
             try:
                 name, value, _ = winreg.EnumValue(key, i)
+                print(f"Startup: {name} -> {value}")
                 i += 1
             except OSError:
                 break
     except ImportError:
         pass
 
-def clear_event_logs():
-    """Clear Windows event logs."""
+
+def clear_event_logs() -> None:
+    """Limpa logs de eventos do Windows."""
     if platform.system() == 'Windows':
         logs = ['Application', 'System', 'Security']
         for log in logs:
             subprocess.run(['wevtutil', 'cl', log], shell=True)
 
-def disk_defragment():
-    """Run defragmentation on C: drive."""
+
+def disk_defragment() -> None:
+    """Executa desfragmentação no disco C:."""
     if platform.system() == 'Windows':
         subprocess.run(['defrag', 'C:', '/U', '/V'], shell=True)
 
-def check_disk_errors():
-    """Run chkdsk on C: drive."""
+
+def check_disk_errors() -> None:
+    """Executa verificação de disco (CHKDSK) em C:."""
     if platform.system() == 'Windows':
         subprocess.run(['chkdsk', 'C:', '/F', '/R'], shell=True)
 
-def clear_browser_cache():
-    """Clear cache for Chrome and Firefox."""
-    # Chrome cache path
-    chrome_cache = os.path.expandvars(r'%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default\\Cache')
-    # Firefox cache path
-    firefox_cache = os.path.expandvars(r'%APPDATA%\\Mozilla\\Firefox\\Profiles')
-    def remove_cache(path):
+
+def clear_browser_cache() -> None:
+    """Remove cache dos navegadores Chrome e Firefox."""
+    chrome_cache = os.path.expandvars(
+        r'%LOCALAPPDATA%\Google\Chrome\User Data\Default\Cache'
+    )
+    firefox_cache = os.path.expandvars(r'%APPDATA%\Mozilla\Firefox\Profiles')
+
+    def remove_cache(path: str) -> None:
         if os.path.exists(path):
             try:
                 shutil.rmtree(path)
-            except Exception:
+            except PermissionError:
                 pass
+
     remove_cache(chrome_cache)
-    # Firefox has multiple profiles
+
     if os.path.exists(firefox_cache):
         for profile in os.listdir(firefox_cache):
             cache_path = os.path.join(firefox_cache, profile, 'cache2')
             remove_cache(cache_path)
 
-def free_memory():
-    """Clear standby memory using Windows API."""
+
+def free_memory() -> None:
+    """Tenta liberar memória standby no Windows."""
     if platform.system() == 'Windows':
         try:
             ctypes.windll.kernel32.SetProcessWorkingSetSize(-1, -1, -1)
         except Exception:
             pass
 
-def clean_registry():
-    """Placeholder for registry cleaning."""
-    pass
 
-def manage_services():
-    """List and optionally disable unnecessary Windows services."""
-    pass
+def clean_registry() -> None:
+    """Placeholder para futuras limpezas de registro."""
+    print("[!] Função de limpeza de registro não implementada.")
 
-def check_updates():
-    """Check for Windows updates."""
-    pass
 
-def network_optimizations():
-    """Apply network optimizations."""
-    pass
+def manage_services() -> None:
+    """Placeholder para gerenciamento de serviços do Windows."""
+    print("[!] Função de gerenciamento de serviços não implementada.")
 
-def clean_prefetch():
-    """Clean Windows prefetch files."""
-    prefetch_path = r'C:\\Windows\\Prefetch'
+
+def check_updates() -> None:
+    """Placeholder para verificação de atualizações do Windows."""
+    print("[!] Função de verificação de updates não implementada.")
+
+
+def network_optimizations() -> None:
+    """Placeholder para otimizações de rede."""
+    print("[!] Função de otimização de rede não implementada.")
+
+
+def clean_prefetch() -> None:
+    """Remove arquivos de prefetch do Windows."""
+    prefetch_path = r'C:\Windows\Prefetch'
     if os.path.exists(prefetch_path):
         for file in os.listdir(prefetch_path):
             try:
                 os.remove(os.path.join(prefetch_path, file))
-            except Exception:
-                pass
+            except PermissionError:
+                continue
 
-def monitor_system():
-    """Display CPU and disk usage."""
-    pass
 
-def schedule_maintenance():
-    """Schedule maintenance tasks."""
-    pass
+def monitor_system() -> None:
+    """Exibe uso atual de CPU e disco."""
+    cpu = psutil.cpu_percent(interval=1)
+    disk = psutil.disk_usage('/')
+    print(f"CPU: {cpu}% | Disco: {disk.percent}%")
 
-def system_info():
-    """Display basic system info."""
-    pass
 
-def optimize_battery():
-    """Optimize battery settings for longer life."""
+def schedule_maintenance() -> None:
+    """Placeholder para agendamento de tarefas de manutenção."""
+    print("[!] Função de agendamento não implementada.")
+
+
+def system_info() -> None:
+    """Mostra informações básicas do sistema."""
+    print(f"Sistema: {platform.system()} {platform.release()}")
+    print(f"Processador: {platform.processor()}")
+    print(f"RAM total: {round(psutil.virtual_memory().total / (1024 ** 3), 2)} GB")
+
+
+def optimize_battery() -> None:
+    """Ativa plano de economia de energia no Windows."""
     if platform.system() == 'Windows':
         try:
-            # Set power scheme to 'Power saver' (GUID: a1841308-3541-4fab-bc81-f71556f20b4a)
-            subprocess.run(['powercfg', '/setactive', 'a1841308-3541-4fab-bc81-f71556f20b4a'], shell=True)
-            print("Battery optimization applied: Power saver mode activated.")
+            subprocess.run(
+                ['powercfg', '/setactive', 'a1841308-3541-4fab-bc81-f71556f20b4a'],
+                shell=True
+            )
+            print("[+] Modo de economia de bateria ativado.")
         except Exception as e:
-            print(f"Failed to optimize battery: {e}")
+            print(f"[!] Falha ao aplicar otimização de bateria: {e}")
     else:
-        print("Battery optimization is only supported on Windows.")
+        print("Bateria só pode ser otimizada no Windows.")
 
-def main():
+
+def main() -> None:
+    """Executa todas as funções de otimização disponíveis."""
     clean_temp_files()
     clear_dns_cache()
     optimize_startup()
@@ -160,6 +193,7 @@ def main():
     monitor_system()
     schedule_maintenance()
     system_info()
+
 
 if __name__ == "__main__":
     main()
