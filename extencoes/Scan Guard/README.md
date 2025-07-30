@@ -4,10 +4,37 @@ Scam Guard é uma extensão de navegador que ajuda a proteger você contra sites
 
 ## Funcionalidades
 
-- Bloqueio de downloads: A extensão bloqueia automaticamente downloads até que uma senha seja configurada e inserida corretamente.
-- Detecção de sites suspeitos: Analisa o conteúdo da página em busca de palavras-chave suspeitas e elementos sensíveis para alertar o usuário sobre possíveis golpes.
-- Interface de configuração: Permite configurar uma senha para desbloquear downloads e gerenciar as configurações de segurança.
-- Alertas visuais: Exibe um alerta de segurança em páginas suspeitas, permitindo que o usuário escolha continuar ou sair do site.
+1. Bloqueio de Downloads Maliciosos:
+   - Monitora downloads iniciados no navegador.
+   - Bloqueia downloads se uma senha estiver configurada e os downloads estiverem bloqueados.
+   - Notifica o usuário e abre uma janela popup para inserção da senha para desbloqueio.
+
+2. Detecção de Palavras-Chave Suspeitas:
+   - Identifica palavras relacionadas a golpes e fraudes em páginas web.
+
+3. Lista de Sites Confiáveis (Whitelist):
+   - Mantém uma lista extensa de domínios confiáveis para evitar falsos positivos.
+
+4. Detecção de Domínios Suspeitos:
+   - Verifica padrões suspeitos e similaridade de domínios para identificar phishing.
+
+5. Detecção de Manipulação Psicológica:
+   - Detecta frases comuns usadas em golpes para manipular o usuário e exibe alertas.
+
+6. Alerta Visual e Interativo:
+   - Exibe alertas visuais com opções para continuar ou sair do site.
+
+7. Monitoramento em Tempo Real do DOM:
+   - Observa mudanças no DOM para bloquear elementos suspeitos como pop-ups invisíveis.
+
+8. Detecção de Eventos Suspeitos:
+   - Detecta eventos como tentativas de sair da página ou redirecionamentos suspeitos.
+
+9. Verificação Avançada de Formulários:
+   - Monitora formulários para envios a domínios não confiáveis e campos sensíveis.
+
+10. Detecção Visual de Phishing:
+    - Verifica se o favicon corresponde ao oficial e alerta sobre sites clonados.
 
 ## Como usar
 
@@ -24,6 +51,7 @@ Scam Guard é uma extensão de navegador que ajuda a proteger você contra sites
 - Refinada a detecção de sites suspeitos para reduzir falsos positivos, exigindo múltiplos sinais antes de alertar.
 - Interface de configuração ajustada para mostrar apenas o campo de inserção de senha quando a senha já estiver configurada.
 - Documentação atualizada em português.
+- Adicionadas novas funcionalidades para melhorar a detecção e bloqueio de golpes, incluindo monitoramento avançado de downloads, domínios suspeitos, manipulação psicológica, eventos suspeitos e verificação visual de phishing.
 
 ## Sites liberados
 
