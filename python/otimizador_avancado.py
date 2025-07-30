@@ -3,32 +3,45 @@ import psutil
 import shutil
 import platform
 import subprocess
-import time
-import random
 import ctypes
 from datetime import datetime
+from typing import List
 from cryptography.fernet import Fernet
 
-# CHAVE FIXA PARA CRIPTOGRAFIA (Altere se quiser uma nova)
-CHAVE_FIXA = b'G6jK9xyvlOpbv_FFp5iQaN6JWGVVwquJZoAq-F5B0xU='  
-
-# Inicializa o sistema de criptografia com a chave fixa
+# === CHAVE FIXA PARA CRIPTOGRAFIA ===
+CHAVE_FIXA: bytes = b'G6jK9xyvlOpbv_FFp5iQaN6JWGVVwquJZoAq-F5B0xU='
 fernet = Fernet(CHAVE_FIXA)
 
-# Criptografa um comando
-def criptografar_comando(comando):
+
+def criptografar_comando(comando: str) -> str:
+    """
+    Criptografa um comando em texto.
+    
+    Args:
+        comando (str): O comando a ser criptografado.
+    Returns:
+        str: Comando criptografado.
+    """
     return fernet.encrypt(comando.encode()).decode()
 
-# Descriptografa e executa o comando
-def executar_comando_criptografado(comando_criptografado):
-    comando = fernet.decrypt(comando_criptografado.encode()).decode()
+
+def executar_comando_criptografado(comando_criptografado: str) -> None:
+    """
+    Descriptografa e executa um comando no sistema.
+    
+    Args:
+        comando_criptografado (str): Comando criptografado previamente.
+    """
+    comando: str = fernet.decrypt(comando_criptografado.encode()).decode()
     subprocess.call(comando, shell=True)
 
-# Limpeza de arquivos temporários
-def limpar_arquivos():
+
+def limpar_arquivos() -> None:
+    """Remove arquivos temporários e caches do sistema."""
     print("[*] Limpando arquivos temporários e caches...")
-    temp_dirs = [os.getenv('TEMP'), 'C:\\Windows\\Temp', '/tmp']
-    total_removidos = 0
+    temp_dirs: List[str] = [os.getenv('TEMP'), 'C:\\Windows\\Temp', '/tmp']
+    total_removidos: int = 0
+
     for temp_dir in temp_dirs:
         if temp_dir and os.path.exists(temp_dir):
             for root, _, files in os.walk(temp_dir):
@@ -36,79 +49,107 @@ def limpar_arquivos():
                     try:
                         os.remove(os.path.join(root, file))
                         total_removidos += 1
-                    except:
+                    except PermissionError:
                         continue
     print(f"[+] {total_removidos} arquivos removidos.")
 
-# Otimização de processos
-def otimizar_processos():
+
+def otimizar_processos() -> None:
+    """Ajusta a prioridade de processos comuns para melhorar desempenho."""
     print("[*] Ajustando prioridades dos processos...")
     for proc in psutil.process_iter():
         try:
             if proc.name() in ["chrome.exe", "firefox.exe", "discord.exe"]:
-                proc.nice(psutil.IDLE_PRIORITY_CLASS)  
+                proc.nice(psutil.IDLE_PRIORITY_CLASS)  # reduzir prioridade
             if proc.name() in ["explorer.exe", "csrss.exe"]:
-                proc.nice(psutil.HIGH_PRIORITY_CLASS)  
+                proc.nice(psutil.HIGH_PRIORITY_CLASS)  # aumentar prioridade
         except (psutil.NoSuchProcess, psutil.AccessDenied):
             continue
     print("[+] Processos otimizados!")
 
-# Limpeza do Registro do Windows
-def limpar_registro_windows():
+
+def limpar_registro_windows() -> None:
+    """Remove chaves temporárias do Registro no Windows."""
     if platform.system() == "Windows":
         print("[*] Limpando o Registro do Windows...")
-        executar_comando_criptografado(criptografar_comando("reg delete HKCU\\Software\\Temp /f"))
+        executar_comando_criptografado(
+            criptografar_comando("reg delete HKCU\\Software\\Temp /f")
+        )
         print("[+] Registro limpo!")
 
-# Ajustes de CPU e RAM para desempenho máximo
-def ajustar_desempenho():
+
+def ajustar_desempenho() -> None:
+    """Configura plano de energia do Windows para máximo desempenho."""
     if platform.system() == "Windows":
         print("[*] Ajustando configurações de desempenho...")
-        executar_comando_criptografado(criptografar_comando("powercfg -setactive SCHEME_MIN"))
+        executar_comando_criptografado(
+            criptografar_comando("powercfg -setactive SCHEME_MIN")
+        )
         print("[+] Desempenho otimizado!")
 
-# Remover arquivos duplicados
-def remover_arquivos_duplicados():
+
+def remover_arquivos_duplicados() -> None:
+    """Remove arquivos duplicados em pastas comuns (Documentos, Downloads)."""
     print("[*] Procurando arquivos duplicados...")
-    paths = [os.getenv('USERPROFILE') + "\\Documents", os.getenv('USERPROFILE') + "\\Downloads"]
-    arquivos = {}
-    duplicados = 0
+    paths: List[str] = [
+        os.path.join(os.getenv('USERPROFILE', ''), "Documents"),
+        os.path.join(os.getenv('USERPROFILE', ''), "Downloads")
+    ]
+
+    arquivos: dict[int, str] = {}
+    duplicados: int = 0
+
     for path in paths:
         if os.path.exists(path):
             for file in os.listdir(path):
                 full_path = os.path.join(path, file)
                 if os.path.isfile(full_path):
-                    hash_file = hash(open(full_path, 'rb').read())
-                    if hash_file in arquivos:
-                        os.remove(full_path)
-                        duplicados += 1
-                    else:
-                        arquivos[hash_file] = full_path
+                    try:
+                        with open(full_path, 'rb') as f:
+                            hash_file: int = hash(f.read())
+                        if hash_file in arquivos:
+                            os.remove(full_path)
+                            duplicados += 1
+                        else:
+                            arquivos[hash_file] = full_path
+                    except PermissionError:
+                        continue
     print(f"[+] {duplicados} arquivos duplicados removidos.")
 
-# Ocultar execução para evitar detecção por antivírus
-def ocultar_execucao():
+
+def ocultar_execucao() -> None:
+    """Oculta a janela do console para execução em segundo plano no Windows."""
     if platform.system() == "Windows":
         ctypes.windll.kernel32.SetConsoleTitleW("")
         ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 
-# Gerar relatório da otimização
-def gerar_relatorio(logs):
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    with open(f"relatorio_otimizacao_{timestamp}.txt", "w") as f:
+
+def gerar_relatorio(logs: List[str]) -> None:
+    """
+    Gera um relatório em arquivo .txt com o resumo da otimização.
+    
+    Args:
+        logs (List[str]): Lista de melhorias aplicadas.
+    """
+    timestamp: str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    nome_arquivo: str = f"relatorio_otimizacao_{timestamp}.txt"
+
+    with open(nome_arquivo, "w", encoding="utf-8") as f:
         f.write("=== RELATÓRIO DE OTIMIZAÇÃO ===\n")
         f.write(f"Data e Hora: {timestamp}\n")
-        f.write(f"Sistema Operacional: {platform.system()} {platform.release()}\n")
-        f.write("\nDetalhes das Melhorias Aplicadas:\n")
+        f.write(f"Sistema Operacional: {platform.system()} {platform.release()}\n\n")
+        f.write("Detalhes das Melhorias Aplicadas:\n")
         for log in logs:
             f.write(f"- {log}\n")
-    print(f"[+] Relatório salvo: relatorio_otimizacao_{timestamp}.txt")
 
-# Função principal
-def main():
+    print(f"[+] Relatório salvo: {nome_arquivo}")
+
+
+def main() -> None:
+    """Executa a sequência completa de otimização do sistema."""
     ocultar_execucao()
-    logs = []
-    
+    logs: List[str] = []
+
     limpar_arquivos()
     logs.append("Arquivos temporários removidos.")
 
@@ -127,6 +168,7 @@ def main():
 
     gerar_relatorio(logs)
     print("[+] Otimização finalizada com sucesso!")
+
 
 if __name__ == "__main__":
     main()
