@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Scam Guard – Configurações</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: "Segoe UI", sans-serif;
+      background: #f4f6f8;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: #222;
+      text-align: center;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #007bff;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    #mensagem {
+      margin-top: 15px;
+      color: green;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .aviso {
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    footer {
+      margin-top: auto;
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      padding: 20px 0 10px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="icon_48.png" class="logo" alt="Logo Scam Guard" />
+    <h2>Configurações de Segurança</h2>
+    <label for="campoSenhaAtual">Senha Atual</label>
+    <input type="password" id="campoSenhaAtual" placeholder="Digite sua senha atual" />
+    <label for="campoNovaSenha">Nova Senha</label>
+    <input type="password" id="campoNovaSenha" placeholder="Digite a nova senha" />
+    <button id="salvarBtn">Salvar Senha</button>
+    <p id="mensagem"></p>
+  </div>
+  <footer>Scam Guard © Todos os direitos reservados</footer>
+  <script src="options.js"></script>
+</body>
+</html>

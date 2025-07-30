@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Scam Guard",
+  "version": "1.1",
+  "description": "Bloqueia golpes e downloads maliciosos.",
+  "icons": {
+    "48": "icon_48.png"
+  },
+  "permissions": [
+    "downloads",
+    "storage",
+    "notifications"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": "icon_48.png",
+    "default_title": "Scam Guard"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [],
+  "options_page": "options.html"
+}

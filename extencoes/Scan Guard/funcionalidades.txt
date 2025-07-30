@@ -1,0 +1,33 @@
+Funcionalidades da Extensão Scam Guard:
+
+1. Bloqueio de Downloads Maliciosos:
+   - Monitora downloads iniciados no navegador.
+   - Bloqueia downloads se uma senha estiver configurada e os downloads estiverem bloqueados.
+   - Notifica o usuário e abre uma janela popup para inserção da senha para desbloqueio.
+
+2. Detecção de Palavras-Chave Suspeitas:
+   - Identifica palavras relacionadas a golpes e fraudes em páginas web.
+
+3. Lista de Sites Confiáveis (Whitelist):
+   - Mantém uma lista extensa de domínios confiáveis para evitar falsos positivos.
+
+4. Detecção de Domínios Suspeitos:
+   - Verifica padrões suspeitos e similaridade de domínios para identificar phishing.
+
+5. Detecção de Manipulação Psicológica:
+   - Detecta frases comuns usadas em golpes para manipular o usuário e exibe alertas.
+
+6. Alerta Visual e Interativo:
+   - Exibe alertas visuais com opções para continuar ou sair do site.
+
+7. Monitoramento em Tempo Real do DOM:
+   - Observa mudanças no DOM para bloquear elementos suspeitos como pop-ups invisíveis.
+
+8. Detecção de Eventos Suspeitos:
+   - Detecta eventos como tentativas de sair da página ou redirecionamentos suspeitos.
+
+9. Verificação Avançada de Formulários:
+   - Monitora formulários para envios a domínios não confiáveis e campos sensíveis.
+
+10. Detecção Visual de Phishing:
+    - Verifica se o favicon corresponde ao oficial e alerta sobre sites clonados.
