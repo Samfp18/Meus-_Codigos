@@ -12,6 +12,7 @@ Este repositório tem como foco:
 
 - 🕸️ **Desenvolvimento Web:** projetos front-end, back-end e full stack, explorando tecnologias modernas para criação de aplicações eficientes, responsivas e escaláveis.
 - ⚙️ **Scripts de Otimização (Python):** automação de tarefas e melhorias de desempenho no sistema operacional Windows, como limpeza de cache, desinstalação em lote, ajustes no registro e muito mais.
+-  🧩 Extensões de navegador desenvolvidas por mim
 - 📂 **Portfólio Técnico:** centralizar e versionar meus códigos de forma organizada e acessível para futuras parcerias ou oportunidades profissionais.
 
 ---
